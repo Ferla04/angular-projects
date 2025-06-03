@@ -1,0 +1,8 @@
+<input
+  #txtInput
+  type="text"
+  class="form-control"
+  [defaultValue]="initialValue"
+  (keyup)="onKeyPress(txtInput.value)"
+  [placeholder]="placeholder"
+/>

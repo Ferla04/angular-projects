@@ -1,0 +1,49 @@
+<h1>Selectores aninados</h1>
+<hr />
+
+<form [formGroup]="myForm">
+  <!-- Region -->
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Contiente:</label>
+      <select formControlName="region" class="form-control">
+        <option value="">-- Seleccione contienete --</option>
+        <option *ngFor="let region of regions" [value]="region">
+          {{ region }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="row mb-3" *ngIf="myForm.get('region')?.value">
+    <div class="col">
+      <label class="form-label">País:</label>
+      <select formControlName="country" class="form-control">
+        <option value="">-- Seleccione contienete --</option>
+        <option *ngFor="let country of contriesByRegion" [value]="country.cca3">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- borders -->
+  <div class="row mb-3" *ngIf="myForm.get('country')?.value">
+    <div class="col">
+      <label class="form-label">Bordes:</label>
+      <select formControlName="border" class="form-control">
+        <option value="">-- Seleccione la frontera --</option>
+        <option *ngFor="let border of bordersByCountry" [value]="border.cca3">
+          {{ border.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+</form>
+
+<h3>Formulario</h3>
+<code>
+  {{ myForm.value | json }}
+</code>
+<p>is form valid: {{ myForm.valid }}</p>
