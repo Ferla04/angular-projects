@@ -8,6 +8,7 @@ import {
 import { Map } from 'maplibre-gl';
 
 @Component({
+  selector: 'maps-full-screen-page',
   templateUrl: './full-screen-page.component.html',
   styleUrls: ['./full-screen-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
