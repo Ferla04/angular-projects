@@ -61,4 +61,20 @@ export class MarkersPageComponent {
 
     this.markers.push({ marker, color });
   }
+
+  deleteMarker(index: number) {
+    if (index < 0 || index >= this.markers.length) {
+      throw new Error('Index out of bounds');
+    }
+
+    this.markers[index].marker.remove();
+    this.markers.splice(index, 1);
+  }
+
+  flyToMarker(marker: Marker) {
+    this.map!.flyTo({
+      zoom: 14,
+      center: marker.getLngLat(),
+    });
+  }
 }
