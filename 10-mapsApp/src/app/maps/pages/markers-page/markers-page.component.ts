@@ -6,6 +6,11 @@ import {
 } from '@angular/core';
 import { LngLat, Map, Marker } from 'maplibre-gl';
 
+interface MarkerAndColor {
+  color: string;
+  marker: Marker;
+}
+
 @Component({
   selector: 'maps-markers-page',
   templateUrl: './markers-page.component.html',
@@ -15,6 +20,7 @@ import { LngLat, Map, Marker } from 'maplibre-gl';
 export class MarkersPageComponent {
   @ViewChild('map') mapElement?: ElementRef<HTMLElement>;
   public map?: Map;
+  public markers: MarkerAndColor[] = [];
 
   ngAfterViewInit(): void {
     if (!this.mapElement) {
@@ -52,5 +58,7 @@ export class MarkersPageComponent {
     })
       .setLngLat(lngLat)
       .addTo(this.map);
+
+    this.markers.push({ marker, color });
   }
 }
