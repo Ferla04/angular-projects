@@ -71,18 +71,10 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
 
     const plainMarkers: PlainMarker[] = JSON.parse(markersData);
 
-    this.markers = plainMarkers.map(({ color, lngLat }) => {
-      const marker = new Marker({
-        color,
-        draggable: true,
-      })
-        .setLngLat(new LngLat(lngLat[0], lngLat[1]))
-        .addTo(this.map!);
-
-      marker.on('dragend', () => this.saveMarkers);
-
-      return { marker, color };
+    plainMarkers.forEach(({ color, lngLat }) => {
+      this.addMarker(lngLat, color);
     });
+
     this.cdr.markForCheck();
   }
 
@@ -95,9 +87,10 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
     const lngLat = this.map.getCenter();
 
     this.addMarker(lngLat, color);
+    this.saveMarkers();
   }
 
-  addMarker(lngLat: LngLat, color: string) {
+  addMarker(lngLat: LngLat | [number, number], color: string) {
     if (!this.map) {
       throw new Error('Map is not initialized');
     }
@@ -110,9 +103,7 @@ export class MarkersPageComponent implements AfterViewInit, OnDestroy {
       .addTo(this.map);
 
     this.markers.push({ marker, color });
-    this.saveMarkers();
-
-    marker.on('dragend', () => this.saveMarkers);
+    marker.on('dragend', () => this.saveMarkers());
   }
 
   deleteMarker(index: number) {
