@@ -9,6 +9,7 @@ import { ZoomRangePageComponent } from './pages/zoom-range-page/zoom-range-page.
 import { MarkersPageComponent } from './pages/markers-page/markers-page.component';
 import { FullScreenPageComponent } from './pages/full-screen-page/full-screen-page.component';
 import { PropertiesPageComponent } from './pages/properties-page/properties-page.component';
+import { CounterAloneComponent } from '../alone/components/counter-alone/counter-alone.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,6 @@ import { PropertiesPageComponent } from './pages/properties-page/properties-page
     FullScreenPageComponent,
     PropertiesPageComponent,
   ],
-  imports: [CommonModule, MapsRoutingModule],
+  imports: [CommonModule, MapsRoutingModule, CounterAloneComponent],
 })
 export class MapsModule {}
